@@ -302,7 +302,6 @@ export default function App() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  // Touch (mobile)
   useEffect(() => {
     const onStart = (e: TouchEvent) => {
       const t = e.changedTouches[0];
@@ -350,7 +349,7 @@ export default function App() {
   }, []);
 
   const makeCode = (scoreVal: number, elapsedSec: number) => {
-    return scoreVal >= 30 ? "4712" : "Code non débloqué";
+    return scoreVal >= 100 ? "4712" : "Code non débloqué";
   };
 
   const progressPct = Math.round(
@@ -404,7 +403,6 @@ export default function App() {
 
           <div className="flex items-start gap-6 flex-wrap">
             <div className="rounded-xl border border-zinc-700 bg-zinc-950/60 p-2 shadow-inner">
-              {/* ✅ Ajout width/height */}
               <canvas
                 ref={canvasRef}
                 className="rounded-md block"
@@ -417,10 +415,9 @@ export default function App() {
               {state.phase === "idle" && (
                 <div className="space-y-3">
                   <p className="text-sm text-zinc-300">
-                    Règles: 1 vie, pas de wrap, obstacles qui apparaissent.
-                    Mange la nourriture verte, évite le poison rouge. Les
-                    touches <b>↑↓←→</b> ou <b>WASD</b> (glisser sur mobile). Fin
-                    de partie en {TIME_LIMIT_S}s ou en cas d'impact.
+                    Règles: 1 vie, Mange la nourriture verte, évite le poison
+                    rouge. Les touches <b>↑↓←→</b> ou <b>ZQSD</b>. Fin de partie
+                    en {TIME_LIMIT_S}s ou en cas d'impact.
                   </p>
                   <Button onClick={start} className="w-full">
                     🚀 Démarrer
@@ -431,15 +428,14 @@ export default function App() {
               {state.phase === "running" && (
                 <div className="space-y-3 text-sm text-zinc-300">
                   <p>
-                    Astuce: enchaîne les pommes pour accélérer le multiplicateur
-                    naturel (la vitesse augmente 😉).
+                    Atteignez le score de 100 pour débloquer le code secret !
                   </p>
                   <div className="grid grid-cols-2 gap-2 text-xs">
                     <div className="p-2 rounded border border-zinc-700 bg-zinc-900">
-                      🟩 Nourriture: +5
+                      🟩 Nourriture: +5 points
                     </div>
                     <div className="p-2 rounded border border-zinc-700 bg-zinc-900">
-                      🟥 Poison: −7 & speed spike
+                      🟥 Poison: −7 points
                     </div>
                     <div className="p-2 rounded border border-zinc-700 bg-zinc-900">
                       ⬛ Obstacles: mort
